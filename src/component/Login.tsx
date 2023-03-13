@@ -8,7 +8,7 @@ import { defaultUser, User } from "../model/User";
 export const Login = () => {
   const navigate = useNavigate();
   const login = useAppSelector((state) => state.login);
-  console.log(login);
+  console.log(login.user);
   const dispatch = useAppDispatch();
 
   const [savedUser, setSavedUser] = useLocalStorage<User>(
@@ -19,7 +19,7 @@ export const Login = () => {
   console.log(savedUser);
 
   useEffect(() => {
-    if (login.user !== undefined) {
+    if (login.user !== undefined && login.user.id !== -1) {
       setSavedUser(login.user);
       navigate("/home");
     }

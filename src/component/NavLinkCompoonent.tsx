@@ -1,9 +1,12 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useLocalStorage } from "usehooks-ts";
+import { useAppDispatch } from "../app/hooks";
+import { reset } from "../features/user/userSlice";
 import { defaultUser, User } from "../model/User";
 
 export const NavLinkCompoonent = () => {
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
   const [savedUser, setSavedUser] = useLocalStorage<User>(
     "saved-user",
     defaultUser
@@ -42,6 +45,7 @@ export const NavLinkCompoonent = () => {
               className="btn btn-outline-success"
               type="submit"
               onClick={() => {
+                dispatch(reset());
                 setSavedUser(defaultUser);
                 navigate("/login");
               }}

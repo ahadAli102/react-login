@@ -12,7 +12,11 @@ export const loginUser = createAsycnThunk("user/login", () => {
 const loginSlice = createSlice({
   name: "user",
   initialState: initialState,
-  reducers: {},
+  reducers: {
+    reset: (state) => {
+      state.user = initialState.user;
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(loginUser.pending, (state) => {
       state.loading = true;
@@ -36,3 +40,4 @@ const loginSlice = createSlice({
 });
 
 export default loginSlice.reducer;
+export const { reset } = loginSlice.actions;
